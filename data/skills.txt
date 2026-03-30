@@ -1,0 +1,40 @@
+python
+sql
+machine learning
+deep learning
+nlp
+flask
+django
+tensorflow
+pytorch
+scikit-learn
+pandas
+numpy
+matplotlib
+seaborn
+java
+c++
+javascript
+html
+css
+react
+nodejs
+mysql
+mongodb
+git
+github
+docker
+aws
+linux
+data structures
+algorithms
+python
+java
+html
+sql
+machine learning
+flask
+react
+nodejs
+mongodb
+mysql
