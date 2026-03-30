@@ -19,15 +19,35 @@ with open("data/skills.txt") as f:
 st.markdown("""
 <style>
 .main-title {
-    font-size: 40px;
-    font-weight: bold;
+    font-size: 48px;
+    font-weight: 700;
     text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .score-box {
-    padding: 15px;
-    border-radius: 12px;
-    background-color: #1e1e1e;
-    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    margin-bottom: 15px;
+    border-left: 4px solid #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+.stTextArea, .stFileUploader {
+    border-radius: 10px !important;
+}
+h2 {
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+}
+h3 {
+    color: #f0f0f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 </style>
 """, unsafe_allow_html=True)
