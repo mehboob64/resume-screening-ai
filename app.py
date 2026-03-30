@@ -19,8 +19,8 @@ with open("data/skills.txt") as f:
 st.markdown("""
 <style>
 .main-title {
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 49px;
+    font-weight: 701;
     text-align: center;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
