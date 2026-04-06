@@ -1,7 +1,7 @@
 import streamlit as st
 import re
 from utils.parser import extract_text
-from model.similarity import get_similarity
+from model.similarity import get_match_details
 from model.skills import extract_skills
 
 # Page config
@@ -13,7 +13,7 @@ st.set_page_config(
 
 # Load skills
 with open("data/skills.txt") as f:
-    skills_list = [s.strip().lower() for s in f.readlines()]
+    skills_list = sorted({s.strip().lower() for s in f.readlines() if s.strip()})
 
 # Custom CSS
 st.markdown("""
@@ -82,20 +82,22 @@ if resume_files and job_desc_clean:
             st.warning(f"⚠ Could not read {file.name}")
             continue
 
-        score = get_similarity(text, job_desc_clean)
+        match_details = get_match_details(text, job_desc_clean, skills_list)
+        score = match_details["score"]
         skills = extract_skills(text, skills_list)
 
-        missing_skills = [
-            s for s in skills_list if s in job_desc_clean and s not in skills
-        ]
 
-        results.append((file.name, score, skills, missing_skills))
+        missing_skills = match_details["missing_skills"]
+        required_skills = match_details["job_skills"]
+        matched_required_skills = match_details["matched_skills"]
+
+        results.append((file.name, score, skills, missing_skills, required_skills, matched_required_skills))
 
     results = sorted(results, key=lambda x: x[1], reverse=True)
 
     st.write("## 🏆 Candidate Ranking")
 
-    for name, score, skills, missing_skills in results:
+    for name, score, skills, missing_skills, required_skills, matched_required_skills in results:
         with st.container():
             st.markdown("---")
 
@@ -106,6 +108,12 @@ if resume_files and job_desc_clean:
 
                 st.progress(min(int(score), 100))
                 st.write(f"### 🎯 Match Score: {score}%")
+
+                if required_skills:
+                    st.info(
+                        f"📌 Required Skills: {', '.join(required_skills)}\n\n"
+                        f"✅ Matched Required Skills: {', '.join(matched_required_skills) if matched_required_skills else 'None'}"
+                    )
 
                 st.success(f"✅ Skills Found: {', '.join(skills) if skills else 'None'}")
 
